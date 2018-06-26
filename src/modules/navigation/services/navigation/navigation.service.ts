@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { PageOneService } from '../../../page-one';
 import { PageTwoService } from '../../../page-two';
-import { PageFourService } from '../../../page-four';
-import { PageThreeService } from '../../../page-three';
+import { PageMessageProducerService } from '../../../message-producer/messageProducer/page-message-producer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,40 +13,25 @@ export class NavigationService {
 
   constructor(public router: Router,
      public pageOneService: PageOneService,
-     public pageTwoService: PageTwoService,
-     public pageThreeService: PageThreeService,
-     public pageFourService: PageFourService) {
+     public pageMessageProducer: PageMessageProducerService,
+     public pageTwoService: PageTwoService) {
   }
 
   subscribeActionEvents() {
-    this.pageOneService.listenMessage().subscribe(value => {
+    this.pageMessageProducer.listenMessage().subscribe(value => {
       this.applyAction(value);
     });
-    this.pageTwoService.listenMessage().subscribe(value => {
-      this.applyAction(value);
-    });
-    this.pageThreeService.listenMessage().subscribe(value => {
-      this.applyAction(value);
-    });
-    this.pageFourService.listenMessage().subscribe(value => {
-      this.applyAction(value);
-    });
+  
   }
 
   applyAction(value) {
-
+    console.log("lolwut",value)
     if (value === 'continue') {
       switch (this.nextPage) {
         case '/page-one':
           this.nextPage = '/page-two';
           break;
         case '/page-two':
-          this.nextPage = '/page-three';
-          break;
-        case '/page-three':
-          this.nextPage = '/page-four';
-          break;
-        case '/page-four':
           this.nextPage = '/page-one';
           break;
         default:
@@ -57,16 +41,10 @@ export class NavigationService {
     } else {
       switch (this.nextPage) {
         case '/page-one':
-          this.nextPage = '/page-four';
+          this.nextPage = '/page-two';
           break;
         case '/page-two':
           this.nextPage = '/page-one';
-          break;
-        case '/page-three':
-          this.nextPage = '/page-two';
-          break;
-        case '/page-four':
-          this.nextPage = '/page-three';
           break;
         default:
           this.nextPage = '/page-one';

@@ -1,11 +1,9 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
 import { PageOneModule } from '../modules/page-one/page-one.module';
 import { PageTwoModule } from '../modules/page-two/page-two.module';
-import { PageThreeModule } from '../modules/page-three/page-three.module';
-import { PageFourModule } from '../modules/page-four/page-four.module';
-import { RouterModule } from '@angular/router';
 import { routes } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 /**********************************
  * WORK IN PROGRESS
@@ -21,8 +19,6 @@ xdescribe('AppComponent', () => {
       imports: [
         PageOneModule,
         PageTwoModule,
-        PageThreeModule,
-        PageFourModule,
         RouterModule.forRoot(routes)
       ],
       declarations: [

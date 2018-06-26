@@ -1,15 +1,15 @@
 import { Observable, Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
-export class MessageProducer {
+@Injectable()
+export abstract class MessageProducer {
 
-  private messageSubject: Subject<{}> = new Subject<{}>();
-
-  sendMessage(value) {
-    this.messageSubject.next(value);
-  }
-
-  listenMessage(): Observable<{}> {
-    return this.messageSubject;
-  }
+  abstract sendMessage(value);
+  // console.log("how much")
+  // this.messageSubject.next(value);
+  abstract listenMessage(): Observable<{}> ;
+  // {
+  //   return this.messageSubject;
+  // }
 
 }

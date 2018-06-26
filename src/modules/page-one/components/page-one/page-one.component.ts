@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { PageOneService } from '../../service/page-one.service';
+import { PageMessageProducerService } from '../../../message-producer/messageProducer/page-message-producer.service';
+
 
 @Component({
   selector: 'app-page-one',
@@ -8,13 +10,18 @@ import { PageOneService } from '../../service/page-one.service';
 })
 export class PageOneComponent {
 
-  constructor(public pageOneService: PageOneService) { }
+  public pageOneModel: string = "";
+
+  constructor(public pageOneService: PageOneService, public messageProducerService: PageMessageProducerService) { 
+    this.pageOneModel=this.pageOneService.getPageOneModel();
+  }
 
   onContinue() {
-    this.pageOneService.sendMessage('continue');
+    this.pageOneService.setPageOneModel(this.pageOneModel);
+    this.messageProducerService.sendMessage('continue');
   }
 
   onBack() {
-    this.pageOneService.sendMessage('back');
+    this.messageProducerService.sendMessage('back');
   }
 }

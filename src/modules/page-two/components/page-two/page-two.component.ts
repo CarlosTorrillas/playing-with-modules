@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageTwoService } from '../../service/page-two.service';
+import { PageMessageProducerService } from '../../../message-producer/messageProducer/page-message-producer.service';
 
 @Component({
   selector: 'app-page-two',
@@ -8,14 +9,18 @@ import { PageTwoService } from '../../service/page-two.service';
 })
 export class PageTwoComponent {
 
-  constructor(public pageTwoService: PageTwoService) { }
+  public pageTwoModel: string = "";
+
+  constructor(public pageTwoService: PageTwoService, public pageMessageProducer: PageMessageProducerService) { 
+    this.pageTwoModel = this.pageTwoService.getPageTwoModel();
+  }
 
   onContinue() {
-    this.pageTwoService.sendMessage('continue');
+    this.pageMessageProducer.sendMessage('continue');
   }
 
   onBack() {
-    this.pageTwoService.sendMessage('back');
+    this.pageMessageProducer.sendMessage('back');
   }
 
 }

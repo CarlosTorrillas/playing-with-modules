@@ -7,8 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { PageOneService, PageOneModule  } from '../modules/page-one/';
 import { PageTwoService, PageTwoModule  } from '../modules/page-two/';
-import { PageThreeService, PageThreeModule } from '../modules/page-three/';
-import { PageFourService, PageFourModule } from '../modules/page-four/';
+import { DataManagerService } from './services/dataManager/data-manager.service';
+import { MessageProducerProjectService } from './services/messageProducerProject/message-producer-project.service';
+import { PageMessageProducerService } from '../modules/message-producer/messageProducer/page-message-producer.service';
 
 
 @NgModule({
@@ -19,16 +20,13 @@ import { PageFourService, PageFourModule } from '../modules/page-four/';
     AppRoutingModule,
     BrowserModule,
     PageOneModule,
-    PageTwoModule,
-    PageThreeModule,
-    PageFourModule
+    PageTwoModule
   ],
   providers: [
+    {provide: PageMessageProducerService, useClass: MessageProducerProjectService},
     AppNavigationService,
-    PageOneService,
-    PageTwoService,
-    PageThreeService,
-    PageFourService
+    {provide: PageOneService, useClass: DataManagerService},
+    {provide: PageTwoService, useExisting: PageOneService},
   ],
   bootstrap: [AppComponent]
 })

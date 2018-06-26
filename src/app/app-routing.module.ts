@@ -15,14 +15,6 @@ export const routes: Routes = [
     loadChildren: 'modules/page-two/page-two.module#PageTwoModule'
   },
   {
-    path: 'page-three',
-    loadChildren: 'modules/page-three/page-three.module#PageThreeModule'
-  },
-  {
-    path: 'page-four',
-    loadChildren: 'modules/page-four/page-four.module#PageFourModule'
-  },
-  {
     path: '',
     redirectTo: '',
     pathMatch: 'full'
